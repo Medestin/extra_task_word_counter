@@ -1,18 +1,26 @@
 package com.extraTask.wordCount;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public final class Counter{
-    private int count;
+    private AtomicInteger count;
 
     protected Counter(){
-        this.count = 1;
+        this.count = new AtomicInteger(1);
     }
 
     protected void increment(){
-        count++;
+        while(true){
+            int existingValue = getCount();
+            int newValue = existingValue + 1;
+            if(count.compareAndSet(existingValue, newValue)){
+                return;
+            }
+        }
     }
 
     public int getCount(){
-        return this.count;
+        return count.get();
     }
 
     @Override

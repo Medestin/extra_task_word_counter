@@ -2,14 +2,14 @@ package com.extraTask.wordCount;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class WordCounter {
     private File file;
     private Scanner scanner;
-    private Map<String, Counter> wordCounts = new HashMap<>();
+    private Map<String, Counter> wordCounts = new ConcurrentHashMap<>();
 
     public WordCounter(String fileName){
         this.file = new File(ClassLoader.getSystemResource(fileName).getFile());
