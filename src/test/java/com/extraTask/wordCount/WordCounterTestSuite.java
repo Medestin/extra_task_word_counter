@@ -40,9 +40,8 @@ public class WordCounterTestSuite {
     }
 
     @Test
-    public void testBook1(){
+    public void testBook1() {
         WordCounter wordCounter = new WordCounter("book1.txt");
-
     }
 }
 
