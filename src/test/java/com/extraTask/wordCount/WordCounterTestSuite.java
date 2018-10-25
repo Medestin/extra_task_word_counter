@@ -41,5 +41,12 @@ public class WordCounterTestSuite {
         Assert.assertEquals(8, wordsTotal);
         Assert.assertEquals(4, countOfXYZ);
     }
+
+    @Test
+    public void testBook1(){
+        WordCounter wordCounter = new WordCounter("book1.txt");
+        wordCounter.countWords();
+
+    }
 }
 
