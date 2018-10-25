@@ -16,7 +16,6 @@ public class WordCounterTestSuite {
     @Test
     public void testSimpleWords() {
         WordCounter wordCounter = new WordCounter("testFile.txt");
-        wordCounter.countWords();
 
         Assert.assertEquals(5, wordCounter.getWordCounts().entrySet().size());
         Assert.assertEquals(2, wordCounter.getWordCounts().get("ma").get());
@@ -25,7 +24,6 @@ public class WordCounterTestSuite {
     @Test
     public void testLoremIpsum1() {
         WordCounter wordCounter = new WordCounter("loremIpsum1.txt");
-        wordCounter.countWords();
 
         long wordsTotal = wordCounter.getWordCounts().entrySet().stream().mapToLong(n -> n.getValue().get()).sum();
         Assert.assertEquals(69, wordsTotal);
@@ -34,7 +32,6 @@ public class WordCounterTestSuite {
     @Test
     public void testWhatever() {
         WordCounter wordCounter = new WordCounter("whatever.txt");
-        wordCounter.countWords();
 
         long wordsTotal = wordCounter.getWordCounts().entrySet().stream().mapToLong(n -> n.getValue().get()).sum();
         long countOfXYZ = wordCounter.getWordCounts().get("xyz").get();
@@ -45,7 +42,6 @@ public class WordCounterTestSuite {
     @Test
     public void testBook1(){
         WordCounter wordCounter = new WordCounter("book1.txt");
-        wordCounter.countWords();
 
     }
 }
