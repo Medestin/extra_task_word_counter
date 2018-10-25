@@ -5,11 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class WordCounter {
     private File file;
     private Scanner scanner;
-    private Map<String, Counter> wordCounts = new ConcurrentHashMap<>();
+    private Map<String, AtomicLong> wordCounts = new ConcurrentHashMap<>();
 
     public WordCounter(String fileName){
         this.file = new File(ClassLoader.getSystemResource(fileName).getFile());
@@ -24,7 +25,7 @@ public final class WordCounter {
         }
     }
 
-    public Map<String, Counter> getWordCounts() {
+    public Map<String, AtomicLong> getWordCounts() {
         return wordCounts;
     }
 
@@ -38,9 +39,15 @@ public final class WordCounter {
 
     private void addToCount(String string){
         if(wordCounts.containsKey(string)){
-            wordCounts.get(string).increment();
+            long currentValue = wordCounts.get(string).get();
+            long newValue = currentValue + 1;
+            while(true){
+                if(wordCounts.get(string).compareAndSet(currentValue, newValue)){
+                    return;
+                }
+            }
         } else {
-            wordCounts.put(string, new Counter());
+            wordCounts.put(string, new AtomicLong(1));
         }
     }
 

@@ -19,7 +19,7 @@ public class WordCounterTestSuite {
         wordCounter.countWords();
 
         Assert.assertEquals(5, wordCounter.getWordCounts().entrySet().size());
-        Assert.assertEquals(2, wordCounter.getWordCounts().get("ma").getCount());
+        Assert.assertEquals(2, wordCounter.getWordCounts().get("ma").get());
     }
 
     @Test
@@ -27,7 +27,7 @@ public class WordCounterTestSuite {
         WordCounter wordCounter = new WordCounter("loremIpsum1.txt");
         wordCounter.countWords();
 
-        int wordsTotal = wordCounter.getWordCounts().entrySet().stream().mapToInt(n -> n.getValue().getCount()).sum();
+        long wordsTotal = wordCounter.getWordCounts().entrySet().stream().mapToLong(n -> n.getValue().get()).sum();
         Assert.assertEquals(69, wordsTotal);
     }
 
@@ -36,8 +36,8 @@ public class WordCounterTestSuite {
         WordCounter wordCounter = new WordCounter("whatever.txt");
         wordCounter.countWords();
 
-        int wordsTotal = wordCounter.getWordCounts().entrySet().stream().mapToInt(n -> n.getValue().getCount()).sum();
-        int countOfXYZ = wordCounter.getWordCounts().get("xyz").getCount();
+        long wordsTotal = wordCounter.getWordCounts().entrySet().stream().mapToLong(n -> n.getValue().get()).sum();
+        long countOfXYZ = wordCounter.getWordCounts().get("xyz").get();
         Assert.assertEquals(8, wordsTotal);
         Assert.assertEquals(4, countOfXYZ);
     }
